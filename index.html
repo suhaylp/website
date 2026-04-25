@@ -83,6 +83,10 @@
       background: rgba(0, 0, 0, 0.05);
     }
 
+    nav a.active {
+      background: rgba(0, 0, 0, 0.08);
+    }
+
     main {
       max-width: 880px;
       margin: 0 auto;
@@ -541,6 +545,27 @@
     <footer>© 2026 Suhayl Patel</footer>
   </main>
 
+  <script>
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+    const OFFSET = 120;
+
+    function updateActive() {
+      const scrollY = window.scrollY;
+      let activeId = null;
+      sections.forEach(section => {
+        if (section.offsetTop <= scrollY + OFFSET) {
+          activeId = section.id;
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href').slice(1) === activeId);
+      });
+    }
+
+    window.addEventListener('scroll', updateActive, { passive: true });
+    updateActive();
+  </script>
 </body>
 
 </html>
