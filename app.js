@@ -25,16 +25,19 @@ function renderHero() {
   `;
 }
 
-function expItem({ title, subtitle, date, icon }) {
+function expItem({ title, subtitle, roles, date, icon }) {
   const iconHtml = icon
     ? `<img src="${escapeHtml(icon)}" alt="" />`
     : '';
+  const rolesHtml = roles
+    ? roles.map((r) => `<div class="role">${escapeHtml(r)}</div>`).join('')
+    : `<div class="role">${escapeHtml(subtitle)}</div>`;
   return `
     <div class="exp-item">
       <div class="exp-icon">${iconHtml}</div>
       <div class="body">
         <h3>${escapeHtml(title)}</h3>
-        <div class="role">${escapeHtml(subtitle)}</div>
+        ${rolesHtml}
       </div>
       <div class="date">${escapeHtml(date)}</div>
     </div>
@@ -49,7 +52,7 @@ function renderEducation() {
 
 function renderExperience() {
   $('experience-list').innerHTML = experience
-    .map((e) => expItem({ title: e.company, subtitle: e.role, date: e.date, icon: e.icon }))
+    .map((e) => expItem({ title: e.company, subtitle: e.role, roles: e.roles, date: e.date, icon: e.icon }))
     .join('');
 }
 
@@ -173,3 +176,4 @@ renderTutoring();
 renderContact();
 setupCarousel();
 setupNav();
+document.querySelector('main').style.opacity = '1';

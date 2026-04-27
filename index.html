@@ -92,7 +92,7 @@
     }
 
     nav a.active {
-      background: rgba(0, 0, 0, 0.08);
+      background: transparent;
     }
 
     .nav-toggle {
@@ -144,6 +144,8 @@
       max-width: 880px;
       margin: 0 auto;
       padding: 32px 24px 96px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
     section {
@@ -559,27 +561,6 @@
     <footer>© 2026 Suhayl Patel</footer>
   </main>
 
-  <script>
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('nav a[href^="#"]');
-    const OFFSET = 120;
-
-    function updateActive() {
-      const scrollY = window.scrollY;
-      let activeId = null;
-      sections.forEach(section => {
-        if (section.offsetTop <= scrollY + OFFSET) {
-          activeId = section.id;
-        }
-      });
-      navLinks.forEach(link => {
-        link.classList.toggle('active', link.getAttribute('href').slice(1) === activeId);
-      });
-    }
-
-    window.addEventListener('scroll', updateActive, { passive: true });
-    updateActive();
-  </script>
   <script type="module" src="./app.js"></script>
 </body>
 
